@@ -23,20 +23,28 @@ void Ground::refresh()
 	glEnable(GL_TEXTURE_2D);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	glMatrixMode(GL_MODELVIEW);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0, 0.0); glVertex3f(-size/2, 0.0, -size / 2);
-	glTexCoord2f(0.0, 1.0); glVertex3f(-size / 2, 0.0 , size / 2);
-	glTexCoord2f(1.0, 1.0); glVertex3f(size / 2, 0.0 , size / 2);
-	glTexCoord2f(1.0, 0.0); glVertex3f(size / 2, 0.0, -size / 2);
-	glEnd();
+
+		
+			glBegin(GL_QUADS);
+
+			glTexCoord2f(0.0, 0.0); glVertex3f(-size/2, 0.0, -size / 2);
+			glTexCoord2f(0.0, 10.0); glVertex3f(-size / 2, 0.0, size / 2);
+			glTexCoord2f(10.0, 10.0); glVertex3f(size / 2, 0.0, size / 2);
+			glTexCoord2f(10.0, 0.0); glVertex3f(size / 2, 0.0, -size / 2);
+			glEnd();
+
+
+			glPopMatrix();
+		
 	
+
 	
 	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_TEXTURE_2D);

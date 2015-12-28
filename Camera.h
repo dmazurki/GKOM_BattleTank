@@ -5,6 +5,7 @@
 
 class Camera : SceneObject
 {
+public:
 	Camera(SceneObject * followedObject, GLfloat distance);
 
 	void refresh();
