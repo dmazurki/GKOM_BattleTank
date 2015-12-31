@@ -18,14 +18,14 @@ void Camera::refresh()
 	//std::cout << followedObject->position.x;
 	GLfloat  angle = followedObject->angle.y;
 
-	/*
-	position.x = position.x - distance*cos(angle* (3.1415 / 180.0)) + 1;
-	position.z = position.z + distance*sin(angle* (3.1415 / 180.0));
-	position.y = followedObject->position.y + 4;
-	*/
-	position.x =followedObject->position.x -distance*cos(angle* (3.1415 / 180.0));
-	position.z = followedObject->position.z + distance*sin(angle* (3.1415 / 180.0));
-	position.y = followedObject->position.y + 4;
+
+	position.x = followedObject->position.x - 3;
+	position.z = followedObject->position.z + 3;
+	position.y = followedObject->position.y + 3.4;
+	
+	//position.x =followedObject->position.x -distance*cos(angle* (3.1415 / 180.0));
+	//position.z = followedObject->position.z + distance*sin(angle* (3.1415 / 180.0));
+	//position.y = followedObject->position.y + 4;
 
 	gluLookAt(
 		position.x,

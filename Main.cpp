@@ -16,7 +16,7 @@ void init()
 {
 	gr = new Ground(100);
 	t = new Tank();
-	c = new Camera(t, 5);
+	c = new Camera(t, 3);
 	s = new Sun();
 
 
@@ -24,14 +24,18 @@ void init()
 	GLfloat mat_ambient[] = { 1.0, 1.0,  1.0, 1.0 };
 	GLfloat mat_specular[] = { 1.0, 1.0,  1.0, 1.0 };
 	GLfloat light_position[] = { 0.0, 10.0, 0.0, 1.0 };
-	GLfloat lm_ambient[] = { 0.2, 0.2,  0.2, 1.0 };
+	//GLfloat light_position[] = { 0.1, 1.0, 0.1, 0.0 };
+
+	GLfloat lm_ambient[] = { 0.3, 0.3,  0.3, 1.0 };
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
 	//glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialf(GL_FRONT, GL_SHININESS, 10);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lm_ambient);
-	
+	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, 1);
+		
+
 
 	glShadeModel(GL_SMOOTH);
 
@@ -112,11 +116,11 @@ void keyPressed(unsigned char key, int x, int y) {
 	//std::cout << "klawisz: " << (int) key << std::endl;
 	if (key == 'w') {
 		std::cout << "w"<<std::endl;
-		t->accelerate(1);
+		t->move(1);
 	}
 	if (key == 's') {
 		std::cout << "s" << std::endl;
-		t->accelerate(-1);
+		t->move(-1);
 	}
 	if (key == 'a') {
 		std::cout << "a" << std::endl;
