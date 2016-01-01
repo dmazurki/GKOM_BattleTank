@@ -1,6 +1,10 @@
 #pragma once
 
+#ifdef __linux__
+#include "GL/glut.h"
+#elif _WIN32
 #include "glut.h"
+#endif
 
 struct Vector3D
 {

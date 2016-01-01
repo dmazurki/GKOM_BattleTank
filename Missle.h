@@ -1,7 +1,11 @@
 #pragma once
 #pragma once
 #include "SceneObject.h"
+#ifdef __linux__
+#include "GL/glut.h"
+#elif _WIN32
 #include "glut.h"
+#endif
 #include <chrono>
 
 
@@ -9,10 +13,10 @@ class Missle : public SceneObject
 {
 
 public:
-	static const GLfloat Missle::MISSLE_AMBIENT[];
-	static const GLfloat Missle::MISSLE_DIFUSE[];
-	static  const GLfloat Missle::MISSLE_SPECULAR[];
-	static const GLfloat Missle::MISSLE_SHININESS;
+	static const GLfloat MISSLE_AMBIENT[];
+	static const GLfloat MISSLE_DIFUSE[];
+	static  const GLfloat MISSLE_SPECULAR[];
+	static const GLfloat MISSLE_SHININESS;
 	static const float EARTH_ACCELERATION;
 
 

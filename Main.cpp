@@ -1,12 +1,13 @@
-#include <windows.h>
+
 #include <GL/gl.h>
+#ifdef __linux__
+#include "GL/glut.h"
+#elif _WIN32
 #include "glut.h"
-#include "Environment.h"
-#include "Tank.h"
-#include "Camera.h"
-#include "Sun.h"
+#endif
+
 #include "Game.h"
-#include <iostream>
+
 
 Game * game;
 void init()

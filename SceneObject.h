@@ -4,7 +4,7 @@
 class SceneObject
 {
 public:
-	SceneObject() {};
+	SceneObject();
 	Vector3D position;
 	Vector3D angle;
 

@@ -1,9 +1,7 @@
 #include "Game.h"
-#include <iostream>
 Game::Game()
 {
 	playerTank = new Tank();
-	playerTank->displayWired(true);
 	tanks.push_back(playerTank);
 
 	camera = new Camera(playerTank, 4);
@@ -33,8 +31,7 @@ void Game::refresh()
 		{
 			missle->update();
 		}
-		//missles.remove(nullptr);
-		missles.remove_if([](Missle * x)->bool 
+		missles.remove_if([](Missle * x)->bool
 		{	if (x->position.y + 10 < 0)
 			{
 				delete x;
