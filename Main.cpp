@@ -1,8 +1,8 @@
 
-#include <GL/gl.h>
 #ifdef __linux__
 #include "GL/glut.h"
 #elif _WIN32
+#include <windows.h>
 #include "glut.h"
 #endif
 
