@@ -1,11 +1,11 @@
 #pragma once
 #include <vector>
 #include <list>
-#include "SceneObject.h"
-#include "Tank.h"
-#include "Missle.h"
-#include "Camera.h"
-#include "Environment.h"
+#include "../../Model/headers/SceneObject.h"
+#include "../../Model/headers/Tank.h"
+#include "../../Model/headers/Missle.h"
+#include "../../Model/headers/Camera.h"
+#include "../../Model/headers/Environment.h"
 
 class Game
 {

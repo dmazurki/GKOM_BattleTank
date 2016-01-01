@@ -1,4 +1,4 @@
-#include "Sun.h"
+#include "../headers/Sun.h"
 
 Sun::Sun()
 {

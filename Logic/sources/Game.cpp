@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "../headers/Game.h"
 Game::Game()
 {
 	playerTank = new Tank();

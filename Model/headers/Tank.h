@@ -39,7 +39,6 @@ public:
 private:
 	float speed;
 
-	GLuint khaki;
 	Movement movement;
 	GLUquadricObj *towerQuadric;
 

@@ -6,7 +6,7 @@
 #include "glut.h"
 #endif
 
-#include "Game.h"
+#include "Logic/headers/Game.h"
 
 
 Game * game;

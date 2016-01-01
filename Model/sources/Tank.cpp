@@ -1,8 +1,8 @@
 
-#include "Tank.h"
+#include "../headers/Tank.h"
 #include <cmath>
 #include <iostream>
-#include "SOIL.h"
+#include "../../SOIL.h"
 
 const float Tank::MAX_SPEED = 0.3;
 const float Tank::ACCELERATION = 1;
@@ -10,30 +10,17 @@ const float Tank::SPEED_DIFFRENTIAL = 0.01;
 const float Tank::TURN_DIFFRENTIAL = 10;
 const float Tank::BRAKING_DIFFRENTIAL = 0.01;
 
-Tank::Tank()
-{
+Tank::Tank() {
 	speed = 0;
-	position = { 0,0,0 };
-	angle = { 0,0,0 };
+	position = {0, 0, 0};
+	angle = {0, 0, 0};
 
 	movement = BRAKE;
-	
+
 	towerQuadric = gluNewQuadric();
 	gluQuadricNormals(towerQuadric, GLU_SMOOTH);
 	gluQuadricTexture(towerQuadric, GL_TRUE);
 
-	std::cout << "Loading ground texture...\n";
-	this->khaki = SOIL_load_OGL_texture
-		(
-			"../Assets/khaki.jpg",
-			SOIL_LOAD_AUTO,
-			SOIL_CREATE_NEW_ID,
-			SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-			);
-	if (0 == this->khaki)
-	{
-		std::cout << "Texture loading error: " << SOIL_last_result() << std::endl;
-	}
 
 }
 
@@ -145,14 +132,14 @@ void Tank::draw()
 
 
 
-	glEnable(GL_TEXTURE_2D);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	//glEnable(GL_TEXTURE_2D);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-	glBindTexture(GL_TEXTURE_2D, khaki);
+	//glBindTexture(GL_TEXTURE_2D, khaki);
 
 	//tower
 	glPushMatrix();
@@ -168,7 +155,7 @@ void Tank::draw()
 	gluCylinder(towerQuadric, 0.1, 0.1, 1, 10, 1);
 	glPopMatrix();
 
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_2D);
 
 
 	//caterpillars

@@ -1,4 +1,4 @@
-#include "Missle.h"
+#include "../headers/Missle.h"
 #include <cmath>
 
 Missle::Missle(float beginSpeed, Vector3D beginPos, Vector3D beginAngle)
