@@ -8,6 +8,7 @@ class Camera : SceneObject
 public:
 	Camera(SceneObject * followedObject, GLfloat distance);
 
+	void updatePosition();
 	void refresh();
 
 private:

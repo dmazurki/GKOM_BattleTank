@@ -37,6 +37,13 @@ Tank::Tank()
 
 }
 
+Missle * Tank::shoot()
+{
+	Vector3D misslePos = { position.x, position.y + 1.25f, position.z };
+	Vector3D missleAng = { 20.0, angle.y, 20.0 };
+	return new Missle(2, misslePos, angle);
+}
+
 void Tank::move(int direction)
 {
 	if (direction == 1)
@@ -61,16 +68,23 @@ void Tank::move(int direction)
 }
 void Tank::turn(int direction)
 {
-
-	angle.y = (angle.y - direction*TURN_DIFFRENTIAL*speed);
+	
+	angle.y = (angle.y - direction*TURN_DIFFRENTIAL*speed*movement);
 	
 	while (angle.y > 360) angle.y -= 360;
 	while (angle.y < 0) angle.y += 360;
-	std::cout << angle.y;
 	
 }
 
-void Tank::refresh()
+void Tank::bounce()
+{
+	if (speed > 0)
+		speed = -MAX_SPEED;
+	else
+		speed = +MAX_SPEED;
+}
+
+void Tank::update()
 {
 	if (movement == BRAKE)
 	{
@@ -87,16 +101,22 @@ void Tank::refresh()
 		if (speed + SPEED_DIFFRENTIAL*movement < MAX_SPEED &&
 			speed + SPEED_DIFFRENTIAL*movement > -MAX_SPEED)
 		{
-			std::cout << "speed" << speed; 
 			speed += SPEED_DIFFRENTIAL*movement;
 		}
-		
+
 
 	}
 
 	position.x = position.x + speed*cos(angle.y* (3.1415 / 180.0));
 	position.z = position.z - speed*sin(angle.y* (3.1415 / 180.0));
-	
+
+}
+
+void Tank::draw()
+{
+	if(isWired())
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 
 	glPushMatrix();
 	const GLfloat ChromeAmbient[4] =
@@ -122,7 +142,6 @@ void Tank::refresh()
 
 	glTranslatef(position.x, position.y, position.z);
 	glRotatef(angle.y, 0, 1, 0);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 
 
@@ -168,12 +187,7 @@ void Tank::refresh()
 
 
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	
-
-	//glutSolidCube(1.5);
-
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glPopMatrix();
 }
 Tank::~Tank() {}

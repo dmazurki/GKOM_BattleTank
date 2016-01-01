@@ -1,24 +1,17 @@
 #include <windows.h>
 #include <GL/gl.h>
 #include "glut.h"
-#include "Ground.h"
+#include "Environment.h"
 #include "Tank.h"
 #include "Camera.h"
 #include "Sun.h"
+#include "Game.h"
 #include <iostream>
 
-Ground * gr;
-Tank * t;
-Camera * c;
-Sun * s;
-
+Game * game;
 void init()
 {
-	gr = new Ground(100);
-	t = new Tank();
-	c = new Camera(t, 3);
-	s = new Sun();
-
+	game = new Game();
 
 
 	GLfloat mat_ambient[] = { 1.0, 1.0,  1.0, 1.0 };
@@ -48,46 +41,14 @@ void init()
 	glEnable(GL_NORMALIZE);
 }
 
-void displayObjects(int frame_no)
-{
-	GLfloat torus_diffuse[] = { 0.7, 0.7, 0.0, 1.0 };
-	GLfloat cube_diffuse[] = { 0.0, 0.7, 0.7, 1.0 };
-	GLfloat sphere_diffuse[] = { 0.7, 0.0, 0.7, 1.0 };
-	GLfloat octa_diffuse[] = { 0.7, 0.4, 0.4, 1.0 };
 
-
-	s->refresh();
-	glPushMatrix();
-	glTranslatef(-0.80, 0.35, 0.0);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, torus_diffuse);
-	glutSolidTorus(0.275 / 2, 0.85 / 2, 10, 10);
-	glPopMatrix();
-
-
-	gr->refresh();
-	t->refresh();
-	
-
-	glPopMatrix();
-}
 
 void display()
 {
-	static int frame_no = 0;
 	glClearColor(0, 0, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//if (frame_no<360) frame_no++; else frame_no = 0;
 
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	c->refresh();
-	glRotatef((GLfloat)frame_no, 0, 1.0,0);
-
-	glMatrixMode(GL_MODELVIEW);
-	displayObjects(frame_no);
-
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
+	game->refresh();
 
 	glFlush();
 	glutSwapBuffers();
@@ -105,7 +66,6 @@ void reshape(GLsizei w, GLsizei h)
 		else {
 			glFrustum(-2.5*w / h, 2.5*w / h, -2.5, 2.5, 2, 50);
 		}
-		// odsuniecie oka obserwatora od srodka ukladu wspolrzednych
 		
 		glMatrixMode(GL_MODELVIEW);
 	}
@@ -113,23 +73,7 @@ void reshape(GLsizei w, GLsizei h)
 
 
 void keyPressed(unsigned char key, int x, int y) {
-	//std::cout << "klawisz: " << (int) key << std::endl;
-	if (key == 'w') {
-		std::cout << "w"<<std::endl;
-		t->move(1);
-	}
-	if (key == 's') {
-		std::cout << "s" << std::endl;
-		t->move(-1);
-	}
-	if (key == 'a') {
-		std::cout << "a" << std::endl;
-		t->turn(-1);
-	}
-	if (key == 'd') {
-		std::cout << "d" << std::endl;
-		t->turn(1);
-	}
+	game->keyPressed(key);
 }
 
 int main(int argc, char** argv)
@@ -142,7 +86,7 @@ int main(int argc, char** argv)
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(640, 480);
 
-	glutCreateWindow("GPOB: OpenGL");
+	glutCreateWindow("Damian Mazurkiewicz: BattleTank");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
@@ -152,8 +96,7 @@ int main(int argc, char** argv)
 	init();
 
 	glutMainLoop();
-	delete gr;
-	delete t;
+	delete game;
 
 	return 0;
 }

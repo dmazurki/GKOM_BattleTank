@@ -1,8 +1,8 @@
-#include "Ground.h"
+#include "Environment.h"
 #include <iostream>
 
 
-Ground::Ground(GLfloat size_) : size(size_)
+Environment::Environment(GLfloat size_) : size(size_)
 {
 	std::cout << "Loading ground texture...\n";
 	this->texture = SOIL_load_OGL_texture
@@ -17,8 +17,12 @@ Ground::Ground(GLfloat size_) : size(size_)
 		std::cout << "Texture loading error: " << SOIL_last_result() << std::endl;
 	}
 }
-void Ground::refresh()
+void Environment::refresh()
 {
+	if (isWired())
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
 	const GLfloat ChromeAmbient[4] =
 	{
 		0.450000, 0.450000, 0.450000, 1.000000
@@ -63,7 +67,8 @@ void Ground::refresh()
 		
 	
 
-	
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();

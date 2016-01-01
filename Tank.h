@@ -1,8 +1,8 @@
 #pragma once
 #include "SceneObject.h"
 #include "glut.h"
+#include "Missle.h"
 #include <chrono>
-
 
 class Tank : public SceneObject
 {
@@ -23,20 +23,21 @@ public:
 	static const GLubyte BOX_INDICES[];
 
 
-
 	Tank();
 	~Tank();
 	void move(int direction);
 	void turn(int direction);
+	void bounce();
+	Missle * shoot();
 
-	void refresh();
-
+	void update();
+	void draw();
 private:
 	float speed;
+
 	GLuint khaki;
 	Movement movement;
 	GLUquadricObj *towerQuadric;
-	std::chrono::time_point<std::chrono::high_resolution_clock> lastAccelerate;
 
 	void  drawCaterpillar(bool right);
 	

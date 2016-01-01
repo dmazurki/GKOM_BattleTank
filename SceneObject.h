@@ -8,4 +8,10 @@ public:
 	Vector3D position;
 	Vector3D angle;
 
+	void displayWired(bool wired_);
+	bool isWired();
+
+private:
+	bool wired;
+
 };

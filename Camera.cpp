@@ -12,20 +12,20 @@ Camera::Camera(SceneObject * followedObject_, GLfloat distance_)
 	position.z = followedObject_->position.z + distance/2;
 
 }
-
-void Camera::refresh()
+void Camera::updatePosition()
 {
-	//std::cout << followedObject->position.x;
 	GLfloat  angle = followedObject->angle.y;
-
 
 	position.x = followedObject->position.x - 3;
 	position.z = followedObject->position.z + 3;
 	position.y = followedObject->position.y + 3.4;
-	
-	//position.x =followedObject->position.x -distance*cos(angle* (3.1415 / 180.0));
-	//position.z = followedObject->position.z + distance*sin(angle* (3.1415 / 180.0));
-	//position.y = followedObject->position.y + 4;
+}
+void Camera::refresh()
+{
+		
+//	position.x =followedObject->position.x -distance*cos(angle* (3.1415 / 180.0));
+//	position.z = followedObject->position.z + distance*sin(angle* (3.1415 / 180.0));
+//	position.y = followedObject->position.y + 4;
 
 	gluLookAt(
 		position.x,

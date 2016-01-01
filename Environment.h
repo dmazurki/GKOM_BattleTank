@@ -1,11 +1,12 @@
 #pragma once
 #include "SOIL.h"
 #include "glut.h"
-class Ground
+#include "SceneObject.h"
+class Environment : public SceneObject
 {
 	GLfloat size;
 	GLuint texture;
 public:
-    Ground(GLfloat size);
+	Environment(GLfloat size);
 	void refresh();
 };

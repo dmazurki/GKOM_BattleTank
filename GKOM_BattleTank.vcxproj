@@ -114,16 +114,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Missle.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="Sun.cpp" />
     <ClCompile Include="Tank.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Missle.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Environment.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Sun.h" />
     <ClInclude Include="Tank.h" />
