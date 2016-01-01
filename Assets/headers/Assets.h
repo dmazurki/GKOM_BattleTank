@@ -12,9 +12,17 @@ class Assets
 public:
     static Assets & getAssets();
 
-    GLuint grassTexture;
+    GLuint groundTexture;
+    GLuint skyTexture;
     GLuint woodTexture;
-    GLuint leafsTexture;
+    GLuint leavesTexture;
+
+    GLuint panzerTowerGunTexture;
+    GLuint panzerBoxTexture;
+    GLuint panzerCaterpillarTexture;
+
+    GLuint missleTexture;
+
 private:
     Assets();
 

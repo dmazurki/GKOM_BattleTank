@@ -9,7 +9,9 @@
 class Environment : public SceneObject
 {
 	GLfloat size;
+	GLUquadricObj * sky;
 public:
 	Environment(GLfloat size);
-	void refresh();
+	~Environment();
+	void draw();
 };

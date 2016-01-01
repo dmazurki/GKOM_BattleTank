@@ -1,16 +1,30 @@
 #include "../headers/Game.h"
+#include "../../Model/headers/Tree.h"
+#include <cmath>
+
 Game::Game()
 {
 	playerTank = new Tank();
 	tanks.push_back(playerTank);
 
-	camera = new Camera(playerTank, 4);
+	camera = new Camera(playerTank, 9);
 	environment = new Environment(100);
+
+	obstacles.push_back(new Tree(Vector3D(20,0,0)));
+	obstacles.push_back(new Tree(Vector3D(6,0,7)));
+	obstacles.push_back(new Tree(Vector3D(7,0,-14)));
+
+
 
 	lastUpdate = 0;
 }
 Game::~Game() 
 {
+
+	for (auto obstacle : obstacles)
+	{
+		delete obstacle;
+	}
 	for (auto tank : tanks)
 	{
 		delete tank;
@@ -27,6 +41,8 @@ void Game::refresh()
 	{
 		for (auto tank : tanks)
 			tank->update();
+
+
 		for (auto missle : missles)
 		{
 			missle->update();
@@ -40,8 +56,14 @@ void Game::refresh()
 			return false;
 		});
 
-		if (playerTank->position.x > 30)
-			playerTank->bounce();
+		for(auto obstacle : obstacles)
+		{
+			for( auto tank : tanks)
+			{
+				if(checkCollision(tank,obstacle))
+					tank->bounce();
+			}
+		}
 
 		camera->updatePosition();
 
@@ -53,8 +75,7 @@ void Game::refresh()
 	camera->refresh();
 
 	glMatrixMode(GL_MODELVIEW);
-	environment->refresh();
-	
+
 
 	
 
@@ -62,6 +83,9 @@ void Game::refresh()
 		tank->draw();
 	for (auto missle : missles)
 		missle->draw();
+	for( auto obstacle : obstacles)
+		obstacle->draw();
+	environment->draw();
 
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
@@ -81,4 +105,14 @@ void Game::keyPressed(char code)
 		break;
 	}
 
+}
+
+bool Game::checkCollision(SceneObject * o1, SceneObject * o2)
+{
+	GLfloat distanceX = std::abs(o1->position.x - o2->position.x);
+	GLfloat distanceZ = std::abs(o1->position.z - o2->position.z);
+
+	GLfloat distance = std::sqrt( distanceX*distanceX + distanceZ*distanceZ);
+
+	return distance < (o1->collisionRadius + o2->collisionRadius);
 }

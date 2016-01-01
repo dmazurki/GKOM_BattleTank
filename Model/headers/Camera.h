@@ -8,15 +8,26 @@
 #include "glut.h"
 #endif
 
-class Camera : SceneObject
+class Camera
 {
 public:
+	static const float SPEED;
+	static const int REFRESHING_DESIRED_POSITION_RATE;
+
 	Camera(SceneObject * followedObject, GLfloat distance);
 
 	void updatePosition();
 	void refresh();
+	void draw(){}
 
 private:
 	SceneObject* followedObject;
+
+	Vector3D position;
+	Vector3D angle;
+	Vector3D desiredAngle;
+
+	int updatesSinceRefresh;
+
 	GLfloat distance;
 };

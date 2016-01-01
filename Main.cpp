@@ -14,30 +14,11 @@ void init()
 {
 	game = new Game();
 
-
-	GLfloat mat_ambient[] = { 1.0, 1.0,  1.0, 1.0 };
-	GLfloat mat_specular[] = { 1.0, 1.0,  1.0, 1.0 };
-	GLfloat light_position[] = { 0.0, 10.0, 0.0, 1.0 };
-	//GLfloat light_position[] = { 0.1, 1.0, 0.1, 0.0 };
-
-	GLfloat lm_ambient[] = { 0.3, 0.3,  0.3, 1.0 };
-
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-	//glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-	glMaterialf(GL_FRONT, GL_SHININESS, 10);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lm_ambient);
-	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, 1);
-		
-
-
-	glShadeModel(GL_SMOOTH);
-
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
+
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_NORMALIZE);
 }
@@ -62,10 +43,12 @@ void reshape(GLsizei w, GLsizei h)
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		if (w <= h) {
-			glFrustum(-2.5, 2.5, -2.5*h / w, 2.5*h / w, 6.0, 40.0);
+			glFrustum(-5, 5, -5*h / w, 5*h / w, 3.0, 40.0);
 		}
 		else {
-			glFrustum(-2.5*w / h, 2.5*w / h, -2.5, 2.5, 2, 50);
+			glFrustum(-3*w / h, 3*w / h, -1, 5, 6, 150);
+			//glOrtho( -5*w/h, 5*w/h, -3, 5,1,10 );
+
 		}
 		
 		glMatrixMode(GL_MODELVIEW);
@@ -101,3 +84,5 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+
+

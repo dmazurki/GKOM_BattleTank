@@ -13,10 +13,6 @@ class Missle : public SceneObject
 {
 
 public:
-	static const GLfloat MISSLE_AMBIENT[];
-	static const GLfloat MISSLE_DIFUSE[];
-	static  const GLfloat MISSLE_SPECULAR[];
-	static const GLfloat MISSLE_SHININESS;
 	static const float EARTH_ACCELERATION;
 
 
@@ -28,12 +24,11 @@ public:
 	void draw();
 
 private:
-	float speed;
 	float speedH;
 	float speedV;
 	int timeElapsed;
 
-	GLUquadricObj *quadric;
+	GLUquadricObj *missleQuadric;
 
 
 };

@@ -1,7 +1,10 @@
 #include "../headers/Camera.h"
+#include "../../Logic/headers/Game.h"
 #include <iostream>
 #include <cmath>
 
+const float Camera::SPEED = 2;
+const int Camera::REFRESHING_DESIRED_POSITION_RATE = Game::UPS/2;
 
 Camera::Camera(SceneObject * followedObject_, GLfloat distance_)
 	:followedObject(followedObject_),distance(distance_)
@@ -11,21 +14,44 @@ Camera::Camera(SceneObject * followedObject_, GLfloat distance_)
 	position.y = followedObject_->position.y + distance;
 	position.z = followedObject_->position.z + distance/2;
 
+	updatesSinceRefresh = 0;
+
 }
 void Camera::updatePosition()
 {
-	GLfloat  angle = followedObject->angle.y;
+	if(updatesSinceRefresh>REFRESHING_DESIRED_POSITION_RATE)
+	{
+		desiredAngle.y = followedObject->angle.y;
+		updatesSinceRefresh=0;
+	}
+	if(angle.y+SPEED<desiredAngle.y)
+	{
+		if(desiredAngle.y-angle.y<180)
+			angle.y+=SPEED;
+		else
+			angle.y=angle.y-SPEED;
 
-	position.x = followedObject->position.x - 3;
-	position.z = followedObject->position.z + 3;
-	position.y = followedObject->position.y + 3.4;
+	}
+	else
+		if(angle.y-SPEED>desiredAngle.y)
+		{
+			if(angle.y - desiredAngle.y<180)
+				angle.y-=SPEED;
+			else
+				angle.y+=SPEED;
+		}
+	while (angle.y > 360) angle.y -= 360;
+	while (angle.y < 0) angle.y += 360;
+
+	position.x =followedObject->position.x -distance*cos(angle.y* (3.1415 / 180.0));
+	position.z = followedObject->position.z + distance*sin(angle.y* (3.1415 / 180.0));
+	position.y = followedObject->position.y + 3;
+	updatesSinceRefresh++;
 }
 void Camera::refresh()
 {
 		
-//	position.x =followedObject->position.x -distance*cos(angle* (3.1415 / 180.0));
-//	position.z = followedObject->position.z + distance*sin(angle* (3.1415 / 180.0));
-//	position.y = followedObject->position.y + 4;
+
 
 	gluLookAt(
 		position.x,

@@ -22,6 +22,7 @@ public:
 	Tank * playerTank;
 
 private:
+	bool checkCollision(SceneObject * o1, SceneObject * o2);
 	std::vector<SceneObject*> obstacles;
 	std::vector<Tank*>	tanks;
 	std::list<Missle*> missles;
