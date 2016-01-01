@@ -4,6 +4,7 @@
 #elif _WIN32
 #include <windows.h>
 #include "glut.h"
+
 #endif
 
 #include "Logic/headers/Game.h"

@@ -5,7 +5,11 @@
 #ifndef GKOM_BATTLETANK_ASSETS_H
 #define GKOM_BATTLETANK_ASSETS_H
 
-#include <GL/gl.h>
+#ifdef __linux__
+#include "GL/glut.h"
+#elif _WIN32
+#include "../../glut.h"
+#endif
 
 class Assets
 {

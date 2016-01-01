@@ -5,71 +5,73 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Model">
-      <UniqueIdentifier>{aee14c22-32d5-4e5d-8754-96f04d1a0067}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model">
-      <UniqueIdentifier>{72c4d25c-75f2-48c7-beb4-8673df71d4c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files\Model</Filter>
+    <ClCompile Include="Logic\sources\Game.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Model</Filter>
+    <ClCompile Include="Model\sources\Camera.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObject.cpp">
-      <Filter>Source Files\Model</Filter>
+    <ClCompile Include="Model\sources\Environment.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sun.cpp">
-      <Filter>Source Files\Model</Filter>
+    <ClCompile Include="Model\sources\Missle.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Missle.cpp">
-      <Filter>Source Files\Model</Filter>
+    <ClCompile Include="Model\sources\SceneObject.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Environment.cpp">
-      <Filter>Source Files\Model</Filter>
+    <ClCompile Include="Model\sources\Sun.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files\Model</Filter>
+    <ClCompile Include="Model\sources\Tank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\sources\Tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets\sources\Assets.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tank.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="Logic\headers\Game.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="Model\headers\Camera.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sun.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="Model\headers\Environment.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3D.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="Model\headers\Missle.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="Model\headers\SceneObject.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Missle.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="Model\headers\Sun.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="Model\headers\Tank.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Environment.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="Model\headers\Tree.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\headers\Vector3D.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets\headers\Assets.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

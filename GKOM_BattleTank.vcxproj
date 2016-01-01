@@ -18,6 +18,30 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Assets\sources\Assets.cpp" />
+    <ClCompile Include="Logic\sources\Game.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Model\sources\Camera.cpp" />
+    <ClCompile Include="Model\sources\Environment.cpp" />
+    <ClCompile Include="Model\sources\Missle.cpp" />
+    <ClCompile Include="Model\sources\SceneObject.cpp" />
+    <ClCompile Include="Model\sources\Sun.cpp" />
+    <ClCompile Include="Model\sources\Tank.cpp" />
+    <ClCompile Include="Model\sources\Tree.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Assets\headers\Assets.h" />
+    <ClInclude Include="Logic\headers\Game.h" />
+    <ClInclude Include="Model\headers\Camera.h" />
+    <ClInclude Include="Model\headers\Environment.h" />
+    <ClInclude Include="Model\headers\Missle.h" />
+    <ClInclude Include="Model\headers\SceneObject.h" />
+    <ClInclude Include="Model\headers\Sun.h" />
+    <ClInclude Include="Model\headers\Tank.h" />
+    <ClInclude Include="Model\headers\Tree.h" />
+    <ClInclude Include="Model\headers\Vector3D.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A21F544B-EFE2-4288-A469-EB8EB380B0CF}</ProjectGuid>
     <RootNamespace>GKOM_BattleTank</RootNamespace>
@@ -112,26 +136,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Environment.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Missle.cpp" />
-    <ClCompile Include="SceneObject.cpp" />
-    <ClCompile Include="Sun.cpp" />
-    <ClCompile Include="Tank.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Missle.h" />
-    <ClInclude Include="Vector3D.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Environment.h" />
-    <ClInclude Include="SceneObject.h" />
-    <ClInclude Include="Sun.h" />
-    <ClInclude Include="Tank.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
