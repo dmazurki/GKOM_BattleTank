@@ -1,18 +1,40 @@
 #include "../headers/Game.h"
 #include "../../Model/headers/Tree.h"
 #include <cmath>
+#include <iostream>
 
 Game::Game()
 {
 	playerTank = new Tank();
 	tanks.push_back(playerTank);
 
-	camera = new Camera(playerTank, 9);
-	environment = new Environment(100);
 
-	obstacles.push_back(new Tree(Vector3D(20,0,0)));
-	obstacles.push_back(new Tree(Vector3D(6,0,7)));
-	obstacles.push_back(new Tree(Vector3D(7,0,-14)));
+	Tank * opponent1 = new Tank(Vector3D(4,0,0));
+	tanks.push_back(opponent1);
+	opponents.push_back(new ComputerOpponent(opponent1));
+
+
+
+
+	camera = new Camera(playerTank, 9);
+
+	environment = new Environment(size);
+
+
+	long seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine generator(seed);
+
+
+	for(GLfloat x = -size*0.7; x<size*0.7; x+=5)
+		for(GLfloat z = -size*0.7; z<size*0.7; z+=5)
+		{
+			int randomVal = std::uniform_int_distribution<int>(0, 100)(generator);
+			if(randomVal>=0 && randomVal<10)
+				obstacles.push_back(new Tree(Vector3D(x,0,z)));
+
+		}
+
+
 
 
 
@@ -32,6 +54,9 @@ Game::~Game()
 	for (auto missle : missles)
 		delete missle;
 
+	for (auto opponent : opponents)
+		delete opponent;
+
 	delete camera;
 	delete environment;
 }
@@ -39,9 +64,13 @@ void Game::refresh()
 {
 	if (glutGet(GLUT_ELAPSED_TIME) - lastUpdate > MILLISECONDS_INTERSPACE)
 	{
-		for (auto tank : tanks)
+		for (auto tank : tanks) {
 			tank->update();
+		}
 
+
+		for(auto opponent : opponents)
+			opponent->action(tanks,missles);
 
 		for (auto missle : missles)
 		{
@@ -56,15 +85,30 @@ void Game::refresh()
 			return false;
 		});
 
-		for(auto obstacle : obstacles)
+		for( auto tank : tanks)
 		{
-			for( auto tank : tanks)
+			if(std::sqrt(tank->position.x*tank->position.x + tank->position.z*tank->position.z)>Game::size)
+				tank->bounce();
+
+			for(auto obstacle : obstacles)
 			{
 				if(checkCollision(tank,obstacle))
 					tank->bounce();
 			}
 		}
 
+		/*
+		for(auto tank1 : tanks)
+		{
+			for( auto tank2 : tanks)
+			{
+				if(tank1!=tank2 && checkCollision(tank1,tank2)) {
+					tank1->bounce();
+					tank2->bounce();
+				}
+			}
+		}
+		*/
 		camera->updatePosition();
 
 		lastUpdate = glutGet(GLUT_ELAPSED_TIME);
@@ -96,11 +140,12 @@ void Game::keyPressed(char code)
 {
 	switch (code)
 	{
-	case 'w': playerTank->move(1); break;
-	case 's': playerTank->move(-1); break;
-	case 'a': playerTank->turn(-1);  break;
-	case 'd': playerTank->turn(1); break;
-	case 'f': 
+		case 'w': playerTank->move(1); break;
+		case 's': playerTank->move(-1); break;
+		case 'a': playerTank->turn(-1);  break;
+		case 'd': playerTank->turn(1); break;
+		case 'c': camera->changeSetting(); break;
+		case 'f':
 		missles.push_back(playerTank->shoot()); 
 		break;
 	}
@@ -116,3 +161,5 @@ bool Game::checkCollision(SceneObject * o1, SceneObject * o2)
 
 	return distance < (o1->collisionRadius + o2->collisionRadius);
 }
+
+const GLfloat Game::size = 60;

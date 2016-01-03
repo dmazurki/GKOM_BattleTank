@@ -17,12 +17,27 @@ Assets::Assets()
     std::cout << "Loading ground texture...\n";
     groundTexture = SOIL_load_OGL_texture
             (
+
+
                     "../Assets/resources/ground.png",
                     SOIL_LOAD_AUTO,
                     SOIL_CREATE_NEW_ID,
                     SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
             );
     if (groundTexture == 0)
+    {
+        std::cout << "Texture loading error: " << SOIL_last_result() << std::endl;
+    }
+
+    std::cout << "Loading wall texture...\n";
+    wallTexture = SOIL_load_OGL_texture
+            (
+                    "../Assets/resources/wall.png",
+                    SOIL_LOAD_AUTO,
+                    SOIL_CREATE_NEW_ID,
+                    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+            );
+    if (wallTexture == 0)
     {
         std::cout << "Texture loading error: " << SOIL_last_result() << std::endl;
     }

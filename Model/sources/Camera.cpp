@@ -7,7 +7,7 @@ const float Camera::SPEED = 2;
 const int Camera::REFRESHING_DESIRED_POSITION_RATE = Game::UPS/2;
 
 Camera::Camera(SceneObject * followedObject_, GLfloat distance_)
-	:followedObject(followedObject_),distance(distance_)
+	:followedObject(followedObject_),distance(distance_),setting(1)
 {
 	angle = followedObject_->angle;
 	position.x = followedObject_->position.x + distance/2;
@@ -43,16 +43,13 @@ void Camera::updatePosition()
 	while (angle.y > 360) angle.y -= 360;
 	while (angle.y < 0) angle.y += 360;
 
-	position.x =followedObject->position.x -distance*cos(angle.y* (3.1415 / 180.0));
-	position.z = followedObject->position.z + distance*sin(angle.y* (3.1415 / 180.0));
+	position.x =followedObject->position.x - setting*distance*cos(angle.y* (3.1415 / 180.0));
+	position.z = followedObject->position.z + setting*distance*sin(angle.y* (3.1415 / 180.0));
 	position.y = followedObject->position.y + 3;
 	updatesSinceRefresh++;
 }
 void Camera::refresh()
 {
-		
-
-
 	gluLookAt(
 		position.x,
 		position.y,
@@ -63,5 +60,7 @@ void Camera::refresh()
 		0.0,
 		1.0,
 		0.0);
-
 }
+
+void Camera::changeSetting()
+{setting = setting*(-1); }

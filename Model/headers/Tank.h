@@ -30,11 +30,16 @@ public:
 
 
 	Tank();
+	Tank(Vector3D beginPosition);
 	~Tank();
 	void move(int direction);
 	void turn(int direction);
 	void bounce();
 	Missle * shoot();
+
+	GLfloat getSpeed();
+	GLfloat getAngle();
+
 
 	void update();
 	void draw();

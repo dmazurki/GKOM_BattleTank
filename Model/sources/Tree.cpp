@@ -56,7 +56,7 @@ void Tree::draw() {
     glMatrixMode (GL_TEXTURE);
     glPushMatrix();
     glLoadIdentity ();
-    glScalef (4, 4, 4);
+    glScalef (6, 6, 4);
 
     glMatrixMode(GL_MODELVIEW);
 
@@ -79,4 +79,4 @@ const GLfloat Tree::MAX_TREE_HEIGHT = 9;
 const GLfloat Tree::MIN_TREE_RADIUS = 0.5;
 const GLfloat Tree::MAX_TREE_RADIUS = 1.5;
 const GLfloat Tree::MIN_TREE_CROWN_RADIUS = 3;
-const GLfloat Tree::MAX_TREE_CROWN_RADIUS = 4.5;
+const GLfloat Tree::MAX_TREE_CROWN_RADIUS = 4;

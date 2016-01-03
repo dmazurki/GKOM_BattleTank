@@ -18,6 +18,8 @@ public:
 
     GLuint groundTexture;
     GLuint skyTexture;
+    GLuint wallTexture;
+
     GLuint woodTexture;
     GLuint leavesTexture;
 

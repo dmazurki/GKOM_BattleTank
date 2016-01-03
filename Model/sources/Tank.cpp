@@ -21,9 +21,15 @@ Tank::Tank() {
 	gluQuadricTexture(towerQuadric, GL_TRUE);
 
 	collisionRadius = 1.5;
+}
 
+Tank::Tank(Vector3D beginPosition) : Tank()
+{
+
+	position = beginPosition;
 
 }
+
 
 Missle * Tank::shoot()
 {
@@ -71,6 +77,11 @@ void Tank::bounce()
 	else
 		speed = +MAX_SPEED;
 }
+
+GLfloat Tank::getSpeed() { return speed;}
+GLfloat Tank::getAngle() { return angle.y;}
+
+
 
 void Tank::update()
 {

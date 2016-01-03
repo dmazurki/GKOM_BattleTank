@@ -18,6 +18,7 @@ public:
 
 	void updatePosition();
 	void refresh();
+	void changeSetting();
 	void draw(){}
 
 private:
@@ -28,6 +29,7 @@ private:
 	Vector3D desiredAngle;
 
 	int updatesSinceRefresh;
+	int setting;
 
 	GLfloat distance;
 };

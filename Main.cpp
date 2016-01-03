@@ -15,6 +15,27 @@ void init()
 {
 	game = new Game();
 
+	GLfloat l_ambient[]    = { 1.0, 1.0,  1.0, 1.0 };
+	GLfloat l_specular[]   = { 1.0, 1.0,  1.0, 1.0 };
+	GLfloat l_position[] = { 0.0, 50.0, 0.0, 1.0 };
+	GLfloat lm_ambient[]     = { 1, 1,  1, 1.0 };
+
+	glLightfv( GL_LIGHT0, GL_AMBIENT, l_ambient );
+	glLightfv( GL_LIGHT0, GL_SPECULAR, l_specular );
+	glLightfv( GL_LIGHT0, GL_DIFFUSE, l_specular );
+	glLightf(GL_LIGHT0,GL_CONSTANT_ATTENUATION,0.3);
+	//glLightf(GL_LIGHT0,GL_LINEAR_ATTENUATION,0.8);
+
+	glMaterialf( GL_LIGHT0, GL_SHININESS, 120.0 );
+	glLightfv( GL_LIGHT0, GL_POSITION, l_position );
+	glLightModelfv( GL_LIGHT_MODEL_AMBIENT, lm_ambient );
+
+	glShadeModel( GL_SMOOTH );
+
+	glEnable( GL_LIGHTING );
+	glEnable( GL_LIGHT0 );
+
+
 	glDepthFunc(GL_LESS);
 	glEnable(GL_DEPTH_TEST);
 
