@@ -2,8 +2,8 @@
 // Created by damian on 01.01.16.
 //
 
-#include "../headers/Tree.h"
-#include "../../Assets/headers/Assets.h"
+#include "Tree.h"
+#include "../Assets/Assets.h"
 #include <random>
 #include <chrono>
 

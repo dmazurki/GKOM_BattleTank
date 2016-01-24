@@ -2,7 +2,7 @@
 // Created by damian on 24.01.16.
 //
 
-#include "../headers/TextureLoader.h"
+#include "TextureLoader.h"
 
 TextureLoader::TextureLoader() : image(0), imageWidth(0), imageHeight(0) {}
 

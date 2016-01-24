@@ -2,9 +2,8 @@
 // Created by damian on 01.01.16.
 //
 
-#include "../headers/Assets.h"
-#include "../../SOIL.h"
-#include "../headers/TextureLoader.h"
+#include "Assets.h"
+#include "TextureLoader.h"
 #include <iostream>
 
 Assets& Assets::getAssets()

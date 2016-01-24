@@ -1,5 +1,5 @@
-#include "../headers/Missle.h"
-#include "../../Assets/headers/Assets.h"
+#include "Missle.h"
+#include "../Assets/Assets.h"
 #include <cmath>
 
 Missle::Missle(float beginSpeed, Vector3D beginPos, Vector3D beginAngle)

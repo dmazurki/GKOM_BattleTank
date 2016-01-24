@@ -5,7 +5,7 @@
 #ifndef GKOM_BATTLETANK_COMPUTEROPPONENT_H
 #define GKOM_BATTLETANK_COMPUTEROPPONENT_H
 
-#include "../../Model/headers/Tank.h"
+#include "../Model/Tank.h"
 #include <list>
 #include <random>
 

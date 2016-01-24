@@ -1,5 +1,4 @@
 #pragma once
-#include "../../SOIL.h"
 
 #ifdef __linux__
 #include "GL/glut.h"

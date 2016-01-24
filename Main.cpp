@@ -7,7 +7,7 @@
 
 #endif
 
-#include "Logic/headers/Game.h"
+#include "Logic/Game.h"
 
 
 Game * game;

@@ -1,5 +1,5 @@
-#include "../headers/Game.h"
-#include "../../Model/headers/Tree.h"
+#include "Game.h"
+#include "../Model/Tree.h"
 #include <cmath>
 #include <iostream>
 

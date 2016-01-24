@@ -1,5 +1,5 @@
-#include "../headers/ComputerOpponent.h"
-#include "../../Logic/headers/Game.h"
+#include "ComputerOpponent.h"
+#include "../Logic/Game.h"
 #include <cmath>
 #include <iostream>
 

@@ -1,11 +1,11 @@
 #pragma once
 #include <list>
-#include "../../Model/headers/SceneObject.h"
-#include "../../Model/headers/Tank.h"
-#include "../../Model/headers/Missle.h"
-#include "../../Model/headers/Camera.h"
-#include "../../Model/headers/Environment.h"
-#include "../../Assets/headers/ComputerOpponent.h"
+#include "../Model/SceneObject.h"
+#include "../Model/Tank.h"
+#include "../Model/Missle.h"
+#include "../Model/Camera.h"
+#include "../Model/Environment.h"
+#include "../Logic/ComputerOpponent.h"
 
 class Game
 {

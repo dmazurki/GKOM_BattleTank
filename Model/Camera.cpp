@@ -1,5 +1,5 @@
-#include "../headers/Camera.h"
-#include "../../Logic/headers/Game.h"
+#include "Camera.h"
+#include "../Logic/Game.h"
 #include <iostream>
 #include <cmath>
 

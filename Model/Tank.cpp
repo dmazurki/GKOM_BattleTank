@@ -1,8 +1,8 @@
 
-#include "../headers/Tank.h"
+#include "Tank.h"
 #include <cmath>
 #include <iostream>
-#include "../../Assets/headers/Assets.h"
+#include "../Assets/Assets.h"
 
 const float Tank::MAX_SPEED = 0.3;
 const float Tank::SPEED_DIFFRENTIAL = 0.01;

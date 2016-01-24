@@ -40,28 +40,28 @@ link_directories(
 )
 
 set(SOURCE_FILES
-        Model/sources/Camera.cpp
-        Model/headers/Camera.h
-        Model/sources/Environment.cpp
-        Model/headers/Environment.h
-        Logic/sources/Game.cpp
-        Logic/headers/Game.h
+        Model/Camera.cpp
+        Model/Camera.h
+        Model/Environment.cpp
+        Model/Environment.h
+        Logic/Game.cpp
+        Logic/Game.h
         Main.cpp
-        Model/sources/Missle.cpp
-        Model/headers/Missle.h
-        Model/sources/SceneObject.cpp
-        Model/headers/SceneObject.h
-        Model/sources/Sun.cpp
-        Model/headers/Sun.h
-        Model/sources/Tank.cpp
-        Model/headers/Tank.h
-        Model/headers/Vector3D.h
-        Model/sources/Tree.cpp
-        Model/headers/Tree.h
-        Assets/sources/Assets.cpp
-        Assets/headers/Assets.h
-        Assets/sources/ComputerOpponent.cpp
-        Assets/headers/ComputerOpponent.h Assets/sources/TextureLoader.cpp Assets/headers/TextureLoader.h)
+        Model/Missle.cpp
+        Model/Missle.h
+        Model/SceneObject.cpp
+        Model/SceneObject.h
+        Model/Sun.cpp
+        Model/Sun.h
+        Model/Tank.cpp
+        Model/Tank.h
+        Model/Vector3D.h
+        Model/Tree.cpp
+        Model/Tree.h
+        Assets/Assets.cpp
+        Assets/Assets.h
+        Logic/ComputerOpponent.cpp
+        Logic/ComputerOpponent.h Assets/TextureLoader.cpp Assets/TextureLoader.h)
 
 add_executable(GKOM_BattleTank ${SOURCE_FILES})
 

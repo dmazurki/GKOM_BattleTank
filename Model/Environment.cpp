@@ -1,6 +1,6 @@
-#include "../headers/Environment.h"
-#include "../../Assets/headers/Assets.h"
-#include "../../Logic/headers/Game.h"
+#include "Environment.h"
+#include "../Assets/Assets.h"
+#include "../Logic/Game.h"
 #include <iostream>
 #include <chrono>
 #include <random>
