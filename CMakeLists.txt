@@ -61,7 +61,7 @@ set(SOURCE_FILES
         Assets/sources/Assets.cpp
         Assets/headers/Assets.h
         Assets/sources/ComputerOpponent.cpp
-        Assets/headers/ComputerOpponent.h)
+        Assets/headers/ComputerOpponent.h Assets/sources/TextureLoader.cpp Assets/headers/TextureLoader.h)
 
 add_executable(GKOM_BattleTank ${SOURCE_FILES})
 

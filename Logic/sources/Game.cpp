@@ -25,14 +25,19 @@ Game::Game()
 	std::default_random_engine generator(seed);
 
 
-	for(GLfloat x = -size*0.7; x<size*0.7; x+=5)
-		for(GLfloat z = -size*0.7; z<size*0.7; z+=5)
-		{
-			int randomVal = std::uniform_int_distribution<int>(0, 100)(generator);
-			if(randomVal>=0 && randomVal<10)
-				obstacles.push_back(new Tree(Vector3D(x,0,z)));
+//	for(GLfloat x = -size*0.7; x<size*0.7; x+=5)
+//		for(GLfloat z = -size*0.7; z<size*0.7; z+=5)
+//		{
+//			int randomVal = std::uniform_int_distribution<int>(0, 100)(generator);
+//			if(randomVal>=0 && randomVal<10)
+//				obstacles.push_back(new Tree(Vector3D(x,0,z)));
+//
+//		}
 
-		}
+	obstacles.push_back(new Tree(Vector3D(10,0,10)));
+	obstacles.push_back(new Tree(Vector3D(40,0,40)));
+
+
 
 
 

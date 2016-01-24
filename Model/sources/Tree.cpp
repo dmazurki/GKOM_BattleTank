@@ -40,19 +40,21 @@ void Tree::draw() {
     glTranslatef(position.x, position.y, position.z);
 
     glEnable(GL_TEXTURE_2D);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
     glBindTexture(GL_TEXTURE_2D, woodTexture);
     glPushMatrix();
     glRotatef(-90,1,0,0);
     gluCylinder(treeQuadric, treeRadius,treeRadius*0.4, treeHeight, 8,8);
     glPopMatrix();
-    glBindTexture(GL_TEXTURE_2D, leavesTexture);
 
+    glDisable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
+
+    glBindTexture(GL_TEXTURE_2D, Assets::getAssets().leavesTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glMatrixMode (GL_TEXTURE);
     glPushMatrix();
     glLoadIdentity ();
