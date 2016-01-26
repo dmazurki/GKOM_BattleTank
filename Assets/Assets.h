@@ -8,7 +8,7 @@
 #ifdef __linux__
 #include "GL/glut.h"
 #elif _WIN32
-#include "../../glut.h"
+#include "/glut.h"
 #endif
 
 class Assets
