@@ -23,8 +23,8 @@ public:
     GLuint woodTexture;
     GLuint leavesTexture;
 
-    GLuint panzerTowerGunTexture;
-    GLuint panzerBoxTexture;
+
+    GLuint tankTexture;
     GLuint panzerCaterpillarTexture;
 
     GLuint missleTexture;

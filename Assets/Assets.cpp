@@ -40,14 +40,12 @@ Assets::Assets()
     leavesTexture = tl.ID;
 
 
-    std::cout << "Loading panzer gun and tower  texture...\n";
-    tl.load("../Assets/resources/panzer_tower_gun.bmp");
-    panzerTowerGunTexture = tl.ID;
+    std::cout << "Loading panzer  texture...\n";
+    tl.load("../Assets/resources/tank.bmp");
+    tankTexture = tl.ID;
 
 
-    std::cout << "Loading panzer box  texture...\n";
-    tl.load("../Assets/resources/panzer_box.bmp");
-    panzerBoxTexture = tl.ID;
+
 
     std::cout << "Loading panzer caterpillar  texture...\n";
     tl.load("../Assets/resources/caterpillar.bmp");

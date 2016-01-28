@@ -3,8 +3,8 @@
 #include <iostream>
 #include <cmath>
 
-const float Camera::SPEED = 2;
-const int Camera::REFRESHING_DESIRED_POSITION_RATE = Game::UPS/2;
+const float Camera::SPEED = 3;
+const int Camera::REFRESHING_DESIRED_POSITION_RATE = Game::UPS/4;
 
 Camera::Camera(SceneObject * followedObject_, GLfloat distance_)
 	:followedObject(followedObject_),distance(distance_),setting(1)

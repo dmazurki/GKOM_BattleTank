@@ -70,12 +70,37 @@ void Tank::turn(int direction)
 	
 }
 
-void Tank::bounce()
+void Tank::bounce(SceneObject * so)
 {
-	if (speed > 0)
-		speed = -MAX_SPEED;
+	GLfloat differenceX;
+	GLfloat differenceZ;
+	if (so!= nullptr) {
+		 differenceX = position.x - so->position.x;
+		 differenceZ = position.z - so->position.z;
+	}
 	else
-		speed = +MAX_SPEED;
+	{
+		differenceX = position.x ;
+		differenceZ = position.z ;
+	}
+	double desiredAngle = 0;
+
+	if(differenceX>=0)
+		desiredAngle = std::atan(-(differenceZ/differenceX))*(180 / 3.1415);
+	else {
+		desiredAngle = std::atan(-(differenceZ/differenceX))*(180 / 3.1415);
+		desiredAngle+=180;
+	}
+
+	if(so == nullptr) desiredAngle+=180;
+
+	while (desiredAngle > 360) desiredAngle -= 360;
+	while (desiredAngle < 0) desiredAngle += 360;
+	bounceAngle = desiredAngle;
+
+	bounceSpeed = MAX_SPEED;
+
+
 }
 
 GLfloat Tank::getSpeed() { return speed;}
@@ -109,6 +134,18 @@ void Tank::update()
 	position.x = position.x + speed*cos(angle.y* (3.1415 / 180.0));
 	position.z = position.z - speed*sin(angle.y* (3.1415 / 180.0));
 
+
+	if (bounceSpeed - BRAKING_DIFFRENTIAL > 0) bounceSpeed -= BRAKING_DIFFRENTIAL;
+	else
+	if (bounceSpeed > 0) bounceSpeed = 0;
+	else
+	if (bounceSpeed + BRAKING_DIFFRENTIAL < 0) bounceSpeed += BRAKING_DIFFRENTIAL;
+	else
+	if (bounceSpeed < 0) bounceSpeed = 0;
+
+	position.x = position.x + bounceSpeed*cos(bounceAngle* (3.1415 / 180.0));
+	position.z = position.z - bounceSpeed*sin(bounceAngle* (3.1415 / 180.0));
+
 }
 
 void Tank::draw()
@@ -125,7 +162,7 @@ void Tank::draw()
 	glEnable(GL_TEXTURE_2D);
 
 
-	glBindTexture(GL_TEXTURE_2D, Assets::getAssets().panzerTowerGunTexture);
+	glBindTexture(GL_TEXTURE_2D, Assets::getAssets().tankTexture);
 
 	//tower
 	glPushMatrix();
@@ -161,7 +198,7 @@ void Tank::draw()
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 
-	glBindTexture(GL_TEXTURE_2D, Assets::getAssets().panzerBoxTexture);
+	glBindTexture(GL_TEXTURE_2D, Assets::getAssets().tankTexture);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);

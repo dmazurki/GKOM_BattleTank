@@ -25,17 +25,16 @@ Game::Game()
 	std::default_random_engine generator(seed);
 
 
-//	for(GLfloat x = -size*0.7; x<size*0.7; x+=5)
-//		for(GLfloat z = -size*0.7; z<size*0.7; z+=5)
-//		{
-//			int randomVal = std::uniform_int_distribution<int>(0, 100)(generator);
-//			if(randomVal>=0 && randomVal<10)
-//				obstacles.push_back(new Tree(Vector3D(x,0,z)));
-//
-//		}
+	for(GLfloat x = -size*0.7; x<size*0.7; x+=9)
+		for(GLfloat z = -size*0.7; z<size*0.7; z+=9)
+		{
+			int randomVal = std::uniform_int_distribution<int>(0, 100)(generator);
+			if(randomVal>=0 && randomVal<10)
+				obstacles.push_back(new Tree(Vector3D(x,0,z)));
 
-	obstacles.push_back(new Tree(Vector3D(10,0,10)));
-	obstacles.push_back(new Tree(Vector3D(40,0,40)));
+		}
+
+
 
 
 
@@ -93,27 +92,27 @@ void Game::refresh()
 		for( auto tank : tanks)
 		{
 			if(std::sqrt(tank->position.x*tank->position.x + tank->position.z*tank->position.z)>Game::size)
-				tank->bounce();
+				tank->bounce(nullptr);
 
 			for(auto obstacle : obstacles)
 			{
 				if(checkCollision(tank,obstacle))
-					tank->bounce();
+					tank->bounce(obstacle);
 			}
 		}
 
-		/*
+
 		for(auto tank1 : tanks)
 		{
 			for( auto tank2 : tanks)
 			{
 				if(tank1!=tank2 && checkCollision(tank1,tank2)) {
-					tank1->bounce();
-					tank2->bounce();
+					tank1->bounce(tank2);
+					tank2->bounce(tank1);
 				}
 			}
 		}
-		*/
+
 		camera->updatePosition();
 
 		lastUpdate = glutGet(GLUT_ELAPSED_TIME);

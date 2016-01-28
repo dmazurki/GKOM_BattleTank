@@ -34,7 +34,7 @@ public:
 	~Tank();
 	void move(int direction);
 	void turn(int direction);
-	void bounce();
+	void bounce(SceneObject * other);
 	Missle * shoot();
 
 	GLfloat getSpeed();
@@ -45,6 +45,9 @@ public:
 	void draw();
 private:
 	float speed;
+
+	float bounceSpeed;
+	float bounceAngle;
 
 	Movement movement;
 	GLUquadricObj *towerQuadric;
