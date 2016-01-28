@@ -8,14 +8,6 @@ Game::Game()
 	playerTank = new Tank();
 	tanks.push_back(playerTank);
 
-
-	Tank * opponent1 = new Tank(Vector3D(4,0,0));
-	tanks.push_back(opponent1);
-	opponents.push_back(new ComputerOpponent(opponent1));
-
-
-
-
 	camera = new Camera(playerTank, 9);
 
 	environment = new Environment(size);
@@ -23,6 +15,16 @@ Game::Game()
 
 	long seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine generator(seed);
+
+	for(int opponentNo = 0; opponentNo<4; opponentNo++)
+	{
+		int x = std::uniform_int_distribution<int>(-size+10, size-10)(generator);
+		int z = std::uniform_int_distribution<int>(-size+10, size-10)(generator);
+
+		Tank * opponent = new Tank(Vector3D(x,0,z));
+		tanks.push_back(opponent);
+		opponents.push_back(new ComputerOpponent(opponent));
+	}
 
 
 	for(GLfloat x = -size*0.7; x<size*0.7; x+=9)
@@ -33,14 +35,6 @@ Game::Game()
 				obstacles.push_back(new Tree(Vector3D(x,0,z)));
 
 		}
-
-
-
-
-
-
-
-
 
 	lastUpdate = 0;
 }
@@ -72,7 +66,6 @@ void Game::refresh()
 			tank->update();
 		}
 
-
 		for(auto opponent : opponents)
 			opponent->action(tanks,missles);
 
@@ -81,13 +74,22 @@ void Game::refresh()
 			missle->update();
 		}
 		missles.remove_if([](Missle * x)->bool
-		{	if (x->position.y + 10 < 0)
+		{	if (x->position.y < - 1)
 			{
 				delete x;
 				return true;
 			}
 			return false;
 		});
+
+		for(auto missle: missles)
+		{
+			for(auto tank : tanks)
+			{
+				if(checkCollision(tank,missle))
+					tank->destroy();
+			}
+		}
 
 		for( auto tank : tanks)
 		{
@@ -150,8 +152,11 @@ void Game::keyPressed(char code)
 		case 'd': playerTank->turn(1); break;
 		case 'c': camera->changeSetting(); break;
 		case 'f':
-		missles.push_back(playerTank->shoot()); 
-		break;
+		{
+			if(!playerTank->isDestroyed())
+					missles.push_back(playerTank->shoot());
+		}break;
+
 	}
 
 }
@@ -163,7 +168,10 @@ bool Game::checkCollision(SceneObject * o1, SceneObject * o2)
 
 	GLfloat distance = std::sqrt( distanceX*distanceX + distanceZ*distanceZ);
 
+
 	return distance < (o1->collisionRadius + o2->collisionRadius);
 }
+
+
 
 const GLfloat Game::size = 60;

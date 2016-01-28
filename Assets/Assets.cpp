@@ -44,12 +44,15 @@ Assets::Assets()
     tl.load("../Assets/resources/tank.bmp");
     tankTexture = tl.ID;
 
-
+    std::cout << "Loading destroyed panzer  texture...\n";
+    tl.load("../Assets/resources/destroyedTank.bmp");
+    destroyedTankTexture = tl.ID;
 
 
     std::cout << "Loading panzer caterpillar  texture...\n";
     tl.load("../Assets/resources/caterpillar.bmp");
     panzerCaterpillarTexture = tl.ID;
+
 
     std::cout << "Loading panzer missle  texture...\n";
     tl.load("../Assets/resources/missle.bmp");

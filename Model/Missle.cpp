@@ -8,6 +8,7 @@ Missle::Missle(float beginSpeed, Vector3D beginPos, Vector3D beginAngle)
 	angle = beginAngle;
 	speedH = beginSpeed*cos((beginAngle.x* 3.1415) / 180);
 	speedV = beginSpeed*sin((beginAngle.y* 3.1415) / 180);
+	collisionRadius = 0.1;
 
 	timeElapsed = 0;
 	missleQuadric = gluNewQuadric();
@@ -52,5 +53,5 @@ void Missle::draw()
 	glPopMatrix();
 }
 
-const float Missle::EARTH_ACCELERATION = 0.01;
+const float Missle::EARTH_ACCELERATION = 0.007;
 

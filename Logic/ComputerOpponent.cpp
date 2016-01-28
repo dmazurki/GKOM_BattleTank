@@ -55,6 +55,8 @@ void ComputerOpponent::action(const std::list<Tank*> & opponents,  std::list<Mis
         {
             if(opponent == self)
                 continue;
+            if(opponent->isDestroyed())
+                continue;
 
             GLfloat distanceX = self->position.x - opponent->position.x;
             GLfloat distanceZ = self->position.z - opponent->position.z;
@@ -68,6 +70,9 @@ void ComputerOpponent::action(const std::list<Tank*> & opponents,  std::list<Mis
             }
         }
 
+        if(toChase == nullptr)
+            return;
+
         objective = toChase->position;
     }
 
@@ -76,6 +81,8 @@ void ComputerOpponent::action(const std::list<Tank*> & opponents,  std::list<Mis
     GLfloat differenceZ = self->position.z - objective.z;
     GLfloat desiredAngle = 0;
 
+    if(differenceX==0)
+        differenceX = 1;
     if(differenceX>=0)
         desiredAngle = std::atan(-(differenceZ/differenceX))*(180 / 3.1415);
     else {
@@ -124,14 +131,15 @@ void ComputerOpponent::action(const std::list<Tank*> & opponents,  std::list<Mis
         {
             shootInteval = std::uniform_real_distribution<float_t>(MIN_SHOOT_INTERVAL, MAX_SHOOT_INTERVAL)(generator);
             currentShootInteval = 0;
-            missles.push_back(self->shoot());
+            if(!self->isDestroyed())
+                missles.push_back(self->shoot());
         }
     }
 
 }
 
 
-const int ComputerOpponent::MIN_SHOOT_INTERVAL = Game::UPS/2;
+const int ComputerOpponent::MIN_SHOOT_INTERVAL = Game::UPS;
 const int ComputerOpponent::MAX_SHOOT_INTERVAL = Game::UPS*2;
 const int ComputerOpponent::MIN_WANDER_TIME = Game::UPS*3;
 const int ComputerOpponent::MAX_WANDER_TIME = Game::UPS*6;

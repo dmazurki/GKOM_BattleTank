@@ -3,9 +3,10 @@
 #include <cmath>
 #include <iostream>
 #include "../Assets/Assets.h"
+#include "../Logic/Game.h"
 
 const float Tank::MAX_SPEED = 0.3;
-const float Tank::SPEED_DIFFRENTIAL = 0.01;
+const float Tank::SPEED_DIFFRENTIAL = 0.02;
 const float Tank::TURN_DIFFRENTIAL = 10;
 const float Tank::BRAKING_DIFFRENTIAL = 0.01;
 
@@ -13,6 +14,8 @@ Tank::Tank() {
 	speed = 0;
 	position = {0, 0, 0};
 	angle = {0, 0, 0};
+
+	destroyed = false;
 
 	movement = BRAKE;
 
@@ -22,6 +25,11 @@ Tank::Tank() {
 
 	collisionRadius = 1.5;
 }
+
+
+void Tank::destroy() {destroyed = true; }
+
+bool Tank::isDestroyed() { return destroyed; }
 
 Tank::Tank(Vector3D beginPosition) : Tank()
 {
@@ -33,8 +41,8 @@ Tank::Tank(Vector3D beginPosition) : Tank()
 
 Missle * Tank::shoot()
 {
+
 	Vector3D misslePos = { position.x, position.y + 1.25f, position.z };
-	Vector3D missleAng = { 20.0, angle.y, 20.0 };
 	return new Missle(2, misslePos, angle);
 }
 
@@ -62,6 +70,8 @@ void Tank::move(int direction)
 }
 void Tank::turn(int direction)
 {
+	if(destroyed)
+		return;
 	
 	angle.y = (angle.y - direction*TURN_DIFFRENTIAL*speed*movement);
 	
@@ -85,6 +95,9 @@ void Tank::bounce(SceneObject * so)
 	}
 	double desiredAngle = 0;
 
+	if(differenceX==0)
+		differenceX=1;
+
 	if(differenceX>=0)
 		desiredAngle = std::atan(-(differenceZ/differenceX))*(180 / 3.1415);
 	else {
@@ -98,7 +111,8 @@ void Tank::bounce(SceneObject * so)
 	while (desiredAngle < 0) desiredAngle += 360;
 	bounceAngle = desiredAngle;
 
-	bounceSpeed = MAX_SPEED;
+	bounceSpeed = MAX_SPEED/2;
+	speed=0;
 
 
 }
@@ -110,6 +124,9 @@ GLfloat Tank::getAngle() { return angle.y;}
 
 void Tank::update()
 {
+	if(destroyed)
+		return;
+
 	if (movement == BRAKE)
 	{
 		if (speed - BRAKING_DIFFRENTIAL > 0) speed -= BRAKING_DIFFRENTIAL;
@@ -162,7 +179,11 @@ void Tank::draw()
 	glEnable(GL_TEXTURE_2D);
 
 
-	glBindTexture(GL_TEXTURE_2D, Assets::getAssets().tankTexture);
+	if(destroyed)
+		glBindTexture(GL_TEXTURE_2D, Assets::getAssets().destroyedTankTexture);
+	else
+		glBindTexture(GL_TEXTURE_2D, Assets::getAssets().tankTexture);
+
 
 	//tower
 	glPushMatrix();
@@ -178,7 +199,24 @@ void Tank::draw()
 	gluCylinder(towerQuadric, 0.1, 0.1, 1, 10, 1);
 	glPopMatrix();
 
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, 0, Tank::BOX_TEXTURE);
+	glVertexPointer(3, GL_FLOAT, 0, Tank::BOX_VERTEX);
+
+	glPushMatrix();
+	glTranslatef(0.0, 0.75, 0.0);
+	glDrawElements(GL_TRIANGLES, 30, GL_UNSIGNED_BYTE, Tank::BOX_INDICES);
+	glPopMatrix();
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+
+	if(destroyed)
+		glBindTexture(GL_TEXTURE_2D, Assets::getAssets().destroyedTankTexture);
+	else
 	glBindTexture(GL_TEXTURE_2D, Assets::getAssets().panzerCaterpillarTexture);
+
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -197,26 +235,11 @@ void Tank::draw()
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 
-
-	glBindTexture(GL_TEXTURE_2D, Assets::getAssets().tankTexture);
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, GL_FLOAT, 0, Tank::BOX_TEXTURE);
-	glVertexPointer(3, GL_FLOAT, 0, Tank::BOX_VERTEX);
-
-	glPushMatrix();
-	glTranslatef(0.0, 0.75, 0.0);
-	glDrawElements(GL_TRIANGLES, 30, GL_UNSIGNED_BYTE, Tank::BOX_INDICES);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glPopMatrix();
-
-	glDisableClientState(GL_VERTEX_ARRAY);
-
 
 	glDisable(GL_TEXTURE_2D);
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glPopMatrix();
 }
 Tank::~Tank() {}
 

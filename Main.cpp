@@ -8,6 +8,7 @@
 #endif
 
 #include "Logic/Game.h"
+#include "Assets/Assets.h"
 
 
 Game * game;
@@ -79,6 +80,10 @@ void reshape(GLsizei w, GLsizei h)
 
 
 void keyPressed(unsigned char key, int x, int y) {
+	if(key == 'r') {
+		delete game;
+		game = new Game;
+	}
 	game->keyPressed(key);
 }
 
@@ -90,7 +95,7 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 
 	glutInitWindowPosition(0, 0);
-	glutInitWindowSize(640, 480);
+	glutInitWindowSize(800, 600);
 
 	glutCreateWindow("Damian Mazurkiewicz: BattleTank");
 

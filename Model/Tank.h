@@ -36,6 +36,8 @@ public:
 	void turn(int direction);
 	void bounce(SceneObject * other);
 	Missle * shoot();
+	void destroy();
+	bool isDestroyed();
 
 	GLfloat getSpeed();
 	GLfloat getAngle();
@@ -44,6 +46,7 @@ public:
 	void update();
 	void draw();
 private:
+	bool destroyed;
 	float speed;
 
 	float bounceSpeed;
@@ -51,6 +54,8 @@ private:
 
 	Movement movement;
 	GLUquadricObj *towerQuadric;
+
+
 };
 
 

@@ -18,6 +18,7 @@ public:
 	Game();
 	~Game();
 	void refresh();
+	void restart();
 	void keyPressed(char code);
 
 	Tank * playerTank;
